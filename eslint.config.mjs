@@ -28,6 +28,7 @@ const eslintConfig = [
         "error",
         { prefer: "type-imports" },
       ],
+      "@typescript-eslint/no-explicit-any": ["off"],
       "no-console": "warn",
       "no-unused-vars": "off",
       "no-unused-expressions": "warn",
