@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Zen_Maru_Gothic } from "next/font/google";
 
 import AppLayout from "@/components/layout/app-layout";
+import { ThemeProvider } from "@/components/provider/theme-provider";
 
 import AppProvider from "./provider";
 
@@ -37,10 +38,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <body className={`${zenMaruGothic.className}`}>
         <AppProvider>
-          <AppLayout>{children}</AppLayout>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AppLayout>{children}</AppLayout>
+          </ThemeProvider>
         </AppProvider>
       </body>
     </html>
