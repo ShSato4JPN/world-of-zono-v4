@@ -1,7 +1,7 @@
 "use client";
 
 import Hamburger from "hamburger-react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { menuList } from "@/app/config/menu";
 import { Button } from "@/components/ui/button/button";
@@ -18,15 +18,11 @@ import SnsIcon from "./sns-icon";
 
 type DrawerMenuProps = {
   direction?: "top" | "bottom" | "left" | "right";
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
 };
 
-export default function DrawerMenu({
-  direction = "left",
-  open,
-  onOpenChange,
-}: DrawerMenuProps) {
+export default function DrawerMenu({ direction = "left" }: DrawerMenuProps) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const menuItems = useMemo(
     () => (
       <ul>
@@ -46,14 +42,14 @@ export default function DrawerMenu({
   );
 
   return (
-    <Drawer direction={direction} open={open} onOpenChange={onOpenChange}>
+    <Drawer
+      direction={direction}
+      open={isOpen}
+      onOpenChange={() => setIsOpen((open) => !open)}
+    >
       <DrawerTrigger asChild>
-        <Button
-          onClick={() => onOpenChange(!open)}
-          variant="ghost"
-          className="h-10 w-10 rounded-full p-0 lg:hidden"
-        >
-          <Hamburger toggled={open} />
+        <Button variant="ghost" className="h-10 w-10  p-0">
+          <Hamburger toggled={isOpen} />
         </Button>
       </DrawerTrigger>
       <DrawerContent>

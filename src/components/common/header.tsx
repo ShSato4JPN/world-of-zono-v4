@@ -1,16 +1,17 @@
 "use client";
-
+import { motion } from "framer-motion";
 import type { JSX } from "react";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import { menuList } from "@/app/config/menu";
+import useVerticalScroll from "@/hooks/useVerticalScroll";
 
 import { Button } from "../ui/button";
 import MenuDrawer from "./menu-drawer";
 import ThemeToggle from "./theme-toggle";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isOver } = useVerticalScroll({ threshold: 200 });
 
   const menuItems = useMemo<JSX.Element>(
     () => (
@@ -37,17 +38,43 @@ export default function Header() {
   );
 
   return (
-    <header className="relative w-full grid place-items-center h-11 sm:p-2 sm:h-20">
-      <div className="absolute left-1 sm:hidden">
-        <MenuDrawer direction="right" open={isOpen} onOpenChange={setIsOpen} />
+    <motion.header
+      className="fixed grid place-items-center top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur shadow"
+      variants={{
+        visible: {
+          y: 0,
+          opacity: 1,
+          transition: {
+            duration: 0.3,
+            ease: "easeInOut",
+          },
+        },
+        hidden: {
+          y: -100,
+          opacity: 0,
+          transition: {
+            duration: 0.3,
+            ease: "easeInOut",
+          },
+        },
+      }}
+      initial="visible"
+      animate={isOver ? "visible" : "hidden"}
+    >
+      <div className="w-full max-w-[1300px] grid grid-cols-[auto_1fr_auto] sm:grid-cols-1">
+        <div className="grid place-items-center sm:hidden">
+          <MenuDrawer direction="right" />
+        </div>
+        <div className="flex flex-row items-center justify-center sm:justify-around">
+          <h1 className="text-center text-xl font-bold sm:text-4xl">
+            World of Zono
+          </h1>
+          <nav className="hidden sm:block sm:p-1">{menuItems}</nav>
+        </div>
+        <div className="grid place-items-center sm:hidden">
+          <ThemeToggle />
+        </div>
       </div>
-      <div className="flex items-center justify-center sm:justify-between w-full max-w-7xl px-4 lg:px-8">
-        <h1 className="text-2xl pb-1.5 sm:text-4xl">World of Zono</h1>
-        <nav className="hidden sm:block">{menuItems}</nav>
-      </div>
-      <div className="absolute right-1 sm:hidden">
-        <ThemeToggle />
-      </div>
-    </header>
+    </motion.header>
   );
 }
