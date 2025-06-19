@@ -39,7 +39,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className="fixed grid place-items-center top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur shadow"
+      className="fixed grid place-items-center top-0 left-0 right-0 z-50 p-1.5 sm:p-0 bg-background/80 backdrop-blur shadow"
       variants={{
         visible: {
           y: 0,
@@ -59,14 +59,14 @@ export default function Header() {
         },
       }}
       initial="visible"
-      animate={isOver ? "visible" : "hidden"}
+      animate={isOver ? "hidden" : "visible"}
     >
       <div className="w-full max-w-[1300px] grid grid-cols-[auto_1fr_auto] sm:grid-cols-1">
         <div className="grid place-items-center sm:hidden">
           <MenuDrawer direction="right" />
         </div>
         <div className="flex flex-row items-center justify-center sm:justify-around">
-          <h1 className="text-center text-xl font-bold sm:text-4xl">
+          <h1 className="font-bold text-center text-xl sm:text-4xl">
             World of Zono
           </h1>
           <nav className="hidden sm:block sm:p-1">{menuItems}</nav>

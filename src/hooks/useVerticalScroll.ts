@@ -7,7 +7,7 @@ type useVerticalScrollProps = {
 export default function useVerticalScroll({
   threshold,
 }: useVerticalScrollProps) {
-  const [isOver, setIsOver] = useState<boolean>(true);
+  const [isOver, setIsOver] = useState<boolean>(false);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
 
   useEffect(() => {
@@ -15,9 +15,9 @@ export default function useVerticalScroll({
       const currentScrollY = window.scrollY;
 
       if (threshold < currentScrollY && lastScrollY < currentScrollY) {
-        setIsOver(false);
-      } else {
         setIsOver(true);
+      } else {
+        setIsOver(false);
       }
 
       setLastScrollY(currentScrollY);
