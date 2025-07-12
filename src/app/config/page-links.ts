@@ -1,6 +1,6 @@
 import { Bookmark, BookOpen, Contact, Mail } from "lucide-react";
 
-export const menuList = [
+export const links = [
   {
     label: "Blog",
     icon: BookOpen,
