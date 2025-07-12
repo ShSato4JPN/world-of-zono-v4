@@ -15,6 +15,7 @@ import ThemeToggle from "./theme-toggle";
 const luckiestGuy = Tektur({
   display: "swap",
   preload: true,
+  subsets: ["latin"],
   adjustFontFallback: true,
   fallback: ["sans-serif"],
   weight: ["500", "700"],

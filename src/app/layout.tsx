@@ -11,6 +11,7 @@ import AppProvider from "./provider";
 const zenMaruGothic = Zen_Maru_Gothic({
   display: "swap",
   preload: true,
+  subsets: ["latin"],
   adjustFontFallback: true,
   fallback: ["sans-serif"],
   weight: ["500", "700", "900"],
