@@ -3,7 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Zen_Maru_Gothic } from "next/font/google";
 
-import AppLayout from "@/components/layout/app-layout";
+import MainLayout from "@/components/layout/main-layout";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 
 import AppProvider from "./provider";
@@ -47,7 +47,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <AppLayout>{children}</AppLayout>
+            <MainLayout>{children}</MainLayout>
           </ThemeProvider>
         </AppProvider>
       </body>
