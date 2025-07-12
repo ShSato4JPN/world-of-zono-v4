@@ -17,7 +17,7 @@ export const links = [
     path: "/bookmark",
   },
   {
-    label: "contact",
+    label: "Contact",
     icon: Mail,
     path: "/contact",
   },

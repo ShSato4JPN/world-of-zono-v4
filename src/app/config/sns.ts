@@ -1,19 +1,19 @@
 import { FaGithub, FaSquareThreads, FaXTwitter } from "react-icons/fa6";
 
-export const snsList = [
+export const sns = [
   {
-    name: "x",
-    url: "https://twitter.com/zonono3104",
+    label: "x",
     icon: FaXTwitter,
+    url: "https://twitter.com/zonono3104",
   },
   {
-    name: "github",
-    url: "https://github.com/ShSato4JPN",
+    label: "github",
     icon: FaGithub,
+    url: "https://github.com/ShSato4JPN",
   },
   {
-    name: "threads",
-    url: "https://www.threads.net/@satoshi1221_jp",
+    label: "threads",
     icon: FaSquareThreads,
+    url: "https://www.threads.net/@satoshi1221_jp",
   },
 ];

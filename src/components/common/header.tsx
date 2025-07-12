@@ -22,13 +22,31 @@ const luckiestGuy = Tektur({
 
 function PageLinks() {
   return (
-    <div className="h-full flex items-center space-x-10 text-lg font-medium">
+    <nav className="h-full flex items-center space-x-10 text-lg font-medium">
       {links.map(({ label, path }) => (
-        <Link key={label} href={path}>
-          {label}
-        </Link>
+        <div key={label} className="relative group">
+          <Link href={path} className="relative z-10 px-1">
+            {label}
+            <span
+              className="
+                pointer-events-none
+                absolute
+                left-0
+                bottom-[-5px]
+                h-0.5
+                w-full
+                origin-left
+                scale-x-0
+                bg-current
+                transition-transform
+                duration-300
+                group-hover:scale-x-100
+              "
+            />
+          </Link>
+        </div>
       ))}
-    </div>
+    </nav>
   );
 }
 
@@ -37,7 +55,6 @@ export default function Header() {
 
   return (
     <motion.header
-      className={clsx(luckiestGuy.className, "font-bold")}
       variants={{
         visible: {
           y: 0,
@@ -58,33 +75,35 @@ export default function Header() {
       }}
       initial="visible"
       animate={isOver ? "hidden" : "visible"}
+      className={clsx(
+        luckiestGuy.className,
+        "sticky top-0 left-0 w-full font-bold z-50 bg-background/80 backdrop-blur shadow",
+      )}
     >
-      <nav>
-        <OnlyMobile
-          element={
-            <div className="flex items-center justify-between p-1.5">
-              <MobileMenu />
-              <Link href="/">
-                <span className="text-xl sm:text-4xl">World-Of-Zono</span>
-              </Link>
+      <OnlyMobile
+        element={
+          <div className="flex items-center justify-between p-1.5">
+            <MobileMenu />
+            <Link href="/">
+              <span className="text-xl sm:text-4xl">World-Of-Zono</span>
+            </Link>
+            <ThemeToggle />
+          </div>
+        }
+      />
+      <OnlyPc
+        element={
+          <div className="flex items-center justify-between p-3">
+            <Link href="/">
+              <span className="text-xl sm:text-4xl">World-Of-Zono</span>
+            </Link>
+            <div className="flex items-center space-x-10">
+              <PageLinks />
               <ThemeToggle />
             </div>
-          }
-        />
-        <OnlyPc
-          element={
-            <div className="flex items-center justify-between p-3">
-              <div className="flex items-center space-x-10">
-                <Link href="/">
-                  <span className="text-xl sm:text-4xl">World-Of-Zono</span>
-                </Link>
-                <PageLinks />
-              </div>
-              <ThemeToggle />
-            </div>
-          }
-        />
-      </nav>
+          </div>
+        }
+      />
     </motion.header>
   );
 }
