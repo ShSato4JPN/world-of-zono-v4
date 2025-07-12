@@ -4,8 +4,8 @@ import Hamburger from "hamburger-react";
 import Link from "next/link";
 import { useState } from "react";
 
-import { links } from "@/app/config/page-links";
-import { sns } from "@/app/config/sns";
+import { links } from "@/components/config/page-links";
+import { sns } from "@/components/config/sns";
 import { Button } from "@/components/ui/button/button";
 import {
   Drawer,

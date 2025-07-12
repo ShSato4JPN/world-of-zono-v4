@@ -9,9 +9,11 @@ type MainLayoutProps = {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
-    <div className="grid grid-rows-[auto_1fr_auto]">
+    <div className="h-screen grid grid-rows-[auto_1fr_auto]">
       <Header />
-      <div className="size-full max-w-[1400px] bg-blue-200">{children}</div>
+      <div className="gird place-items-center">
+        <main className="size-full max-w-[1400px]">{children}</main>
+      </div>
       <Footer />
     </div>
   );

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Tektur } from "next/font/google";
 import Link from "next/link";
 
-import { links } from "@/app/config/page-links";
+import { links } from "@/components/config/page-links";
 import useVerticalScroll from "@/hooks/useVerticalScroll";
 
 import MobileMenu from "./mobile-menu";
