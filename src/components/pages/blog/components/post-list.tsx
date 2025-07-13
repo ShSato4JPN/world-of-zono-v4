@@ -38,7 +38,7 @@ export default function PostList({ onPostsPrefetch }: PostListProps) {
   );
 
   return (
-    <div className="mt-2">
+    <div className="box-border p-3">
       <InfiniteScroll
         dataLength={posts.length}
         next={fetchNextPage}
@@ -51,7 +51,7 @@ export default function PostList({ onPostsPrefetch }: PostListProps) {
       >
         <div className="divide-y space-y-4">
           {posts.map((post, index) => (
-            <Post key={index} {...post}></Post>
+            <Post key={index} {...post} />
           ))}
         </div>
       </InfiniteScroll>

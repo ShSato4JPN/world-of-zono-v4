@@ -15,9 +15,9 @@ export default function Post({ id, title, tags, body, createdAt }: PostProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-md">{createdAt}</div>
+      <div className="text-sm">{createdAt}</div>
       <Link href={`/blog/${id}`}>
-        <div className="text-2xl">{title}</div>
+        <div className="text-lg sm:text-2xl">{title}</div>
       </Link>
       <div className="flex gap-1">
         {tags.map((tag) => (
@@ -26,7 +26,9 @@ export default function Post({ id, title, tags, body, createdAt }: PostProps) {
           </div>
         ))}
       </div>
-      <div className="line-clamp-3">{stripHtml(body).result}</div>
+      <div className="overflow-hidden break-words break-all line-clamp-3">
+        {stripHtml(body).result}
+      </div>
       <div className="grid place-items-center mb-2">
         <button
           type="button"

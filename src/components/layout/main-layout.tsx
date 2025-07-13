@@ -11,7 +11,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="h-screen grid grid-rows-[auto_1fr_auto]">
       <Header />
-      <div className="gird place-items-center">
+      <div className="grid place-items-center">
         <main className="size-full max-w-[1400px]">{children}</main>
       </div>
       <Footer />
