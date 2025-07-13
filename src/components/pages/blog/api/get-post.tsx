@@ -23,8 +23,13 @@ export const getPosts = async (limit: number, skip: number) => {
 export const getPostInfiniteQueryOptions = () => {
   return infiniteQueryOptions({
     queryKey: ["posts"],
-    queryFn: (ctx) => getPosts(limit, ctx.pageParam),
-    getNextPageParam: (param) => param.skip + limit,
+    queryFn: (context) => getPosts(limit, context.pageParam),
+    getNextPageParam: (fetchedData) => {
+      const { skip, total } = fetchedData;
+      const nextSkip = skip + limit;
+      // undefined を返却するとフェッチされなくなる
+      return nextSkip <= total ? nextSkip : undefined;
+    },
     initialPageParam: 0,
   });
 };

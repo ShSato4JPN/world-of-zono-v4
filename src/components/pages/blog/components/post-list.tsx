@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { useMemo } from "react";
-import { useInView } from "react-intersection-observer";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import Spinner from "@/components/common/spinner";
 
@@ -13,17 +13,18 @@ type PostListProps = {
 };
 
 export default function PostList({ onPostsPrefetch }: PostListProps) {
-  console.log(onPostsPrefetch); // TODO エラー回避
+  console.log(onPostsPrefetch); // TODO
 
-  const postsInfiniteQuery = useInfiniteQuery(getPostInfiniteQueryOptions());
-
-  const { ref, inView } = useInView({ threshold: 0 });
+  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
+    getPostInfiniteQueryOptions(),
+  );
 
   const posts = useMemo(
     () =>
       (
-        postsInfiniteQuery.data?.pages.map((page) =>
+        data?.pages.map((page) =>
           page.items.map((post) => ({
+            id: post.sys.id as string,
             title: post.fields.title as string,
             tags: post.fields.tags as string[],
             body: post.fields.body as string,
@@ -33,22 +34,27 @@ export default function PostList({ onPostsPrefetch }: PostListProps) {
           })),
         ) || []
       ).flat(),
-    [postsInfiniteQuery.data],
+    [data],
   );
 
   return (
-    <div>
-      <div ref={ref}>
-        <h2>{`Header inside viewport ${inView}.`}</h2>
-        {posts.map((post, index) => (
-          <Post key={index} {...post}></Post>
-        ))}
-      </div>
-      {postsInfiniteQuery.isLoading && (
-        <div className="flex w-full items-center justify-center">
-          <Spinner />
+    <div className="mt-2">
+      <InfiniteScroll
+        dataLength={posts.length}
+        next={fetchNextPage}
+        hasMore={hasNextPage}
+        loader={
+          <div className="grid place-items-center my-5">
+            <Spinner />
+          </div>
+        }
+      >
+        <div className="divide-y space-y-4">
+          {posts.map((post, index) => (
+            <Post key={index} {...post}></Post>
+          ))}
         </div>
-      )}
+      </InfiniteScroll>
     </div>
   );
 }
