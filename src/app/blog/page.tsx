@@ -4,9 +4,9 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
-import { getPostInfiniteQueryOptions } from "@/components/pages/blog/api/get-post";
+import { getPostInfiniteQueryOptions } from "@/components/pages/blog/api/get-posts";
 
-import Blog from "./_components/blog";
+import BlogTop from "./_components/blog-top";
 
 export default async function page() {
   const queryClient = new QueryClient();
@@ -17,7 +17,7 @@ export default async function page() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <Blog />
+      <BlogTop />
     </HydrationBoundary>
   );
 }

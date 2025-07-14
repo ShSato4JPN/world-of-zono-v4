@@ -15,12 +15,12 @@ export type BlogPostSkeleton = {
 
 // Bookmark 機能を実装するため、基本的に getEntries でデータを取得して、フロント側で整合性を取る
 //export type BlogPostData = contentful.Entry<BlogPostSkeleton>;
-export type BlogPostsData = contentful.EntryCollection<BlogPostSkeleton>;
+export type BlogPostData = contentful.EntryCollection<BlogPostSkeleton>;
 
 export async function GET(
   _: Request,
   { params }: { params: Promise<{ id: string }> },
-): Promise<NextResponse<BlogPostsData>> {
+): Promise<NextResponse<BlogPostData>> {
   const { id } = await params;
 
   const entry = await client.getEntries<BlogPostSkeleton>({
